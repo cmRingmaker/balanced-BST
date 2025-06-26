@@ -1,0 +1,68 @@
+/*
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Globals
+*
+* [1a]
+*   Size hack to set default font size to 10px rather than 16.
+*   Makes 1rem the equivelent of 10px. (2.4rem = 24px, etc).
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+:root {
+	font-size: 62.5%; /* [1a] */
+
+	/* Main colors */
+	--COLOR_BG: hsl(0, 5%, 10%);
+	--COLOR_PRIMARY: hsl(220, 90%, 15%);
+	--COLOR_SECONDARY: hsl(303, 71%, 73%);
+
+	/* Text */
+	--FONT_COLOR: hsl(30, 100%, 98%);
+}
+
+/* 
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Base page styles
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+body {
+	font-size: 1.8rem;
+	background-color: var(--COLOR_BG);
+	color: var(--FONT_COLOR);
+	height: 100vh;
+}
+
+::selection {
+	background-color: var(--COLOR_SECONDARY);
+	color: var(--COLOR_BG);
+}
+
+/* 
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Header
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+header {
+	background-color: var(--COLOR_PRIMARY);
+}
+
+/*
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Main
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+main {
+}
+
+/*
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Footer
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+footer {
+	background-color: var(--COLOR_PRIMARY);
+}
