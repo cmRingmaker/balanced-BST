@@ -58,14 +58,41 @@ export class Tree {
 		// If nothing found, return null
 	}
 
-	// I'll pseudocode these later
-	levelOrder(callback) {}
+	// levelOrder is a breadth-first traversal
+	levelOrder(callback) {
+		// Init current node with root node
+		let currentNode = this.root
+		// Init a queue
+		const queue = []
+		// If no callback, throw error
+		// If root === null : return
+		// Add root to queue
+		// While queue has items:
+		//    Dequeue first item
+		//    Call callback on this node
+		//    If node has L child, add to queue
+		//    If node has R child, add to queue
+	}
 
-	inOrder(callback) {}
+	// inOrder, preOrder, and postOrder are depth-first traversal
 
-	preOrder(callback) {}
+	// <left> <root> <right>
+	inOrder(callback) {
+		// Init current node with root node
+		let currentNode = this.root
+	}
 
-	postOrder(callback) {}
+	// <root> <left> <right>
+	preOrder(callback) {
+		// Init current node with root node
+		let currentNode = this.root
+	}
+
+	// <left> <right> <root>
+	postOrder(callback) {
+		// Init current node with root node
+		let currentNode = this.root
+	}
 
 	height(value) {}
 
