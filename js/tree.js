@@ -74,24 +74,33 @@ export class Tree {
 		//    If node has R child, add to queue
 	}
 
-	// inOrder, preOrder, and postOrder are depth-first traversal
+	// inOrder, preOrder, and postOrder are recursive depth-first traversal
 
 	// <left> <root> <right>
-	inOrder(callback) {
-		// Init current node with root node
-		let currentNode = this.root
+	inOrder(callback, node = this.root) {
+		if (!callback) throw new Error('No callback provided.')
+		if (node === null) return
+		this.inOrder(callback, node.left)
+		callback(node)
+		this.inOrder(callback, node.right)
 	}
 
 	// <root> <left> <right>
-	preOrder(callback) {
-		// Init current node with root node
-		let currentNode = this.root
+	preOrder(callback, node = this.root) {
+		if (!callback) throw new Error('No callback provided.')
+		if (node === null) return
+		callback(node)
+		this.preOrder(callback, node.left)
+		this.preOrder(callback, node.right)
 	}
 
 	// <left> <right> <root>
-	postOrder(callback) {
-		// Init current node with root node
-		let currentNode = this.root
+	postOrder(callback, node = this.root) {
+		if (!callback) throw new Error('No callback provided.')
+		if (node === null) return
+		this.postOrder(callback, node.left)
+		this.postOrder(callback, node.right)
+		callback(node)
 	}
 
 	height(value) {}
