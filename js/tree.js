@@ -8,6 +8,9 @@ export class Tree {
 
 	buildTree(arr) {
 		// Take in array of data, turn into BBST
+		let start = 0
+		let mid = arr.length / 2
+		let end = arr.length - 1
 		// Sort and remove dupes
 		// Return level-0 root node
 	}
@@ -43,9 +46,7 @@ export class Tree {
 		// Note: if 3 happens, the deletion will eventually fall into case 1 or 2
 	}
 
-	find(value) {
-		// Init current node with root node
-		let currentNode = this.root
+	find(value, node = this.root) {
 		// Find node containing (value) in a loop
 		// 1. If value === current: return current
 		//
