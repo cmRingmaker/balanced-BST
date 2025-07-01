@@ -2,17 +2,21 @@ import { Node } from './node.js'
 
 export class Tree {
 	constructor(arr = []) {
-		this.arr = arr
+		this.arr = [...new Set(arr)].sort((a, b) => a - b) // Sort and remove dupes
 		this.root = this.buildTree(this.arr)
 	}
 
-	buildTree(arr) {
-		// Take in array of data, turn into BBST
-		let start = 0
-		let mid = arr.length / 2
-		let end = arr.length - 1
-		// Sort and remove dupes
-		// Return level-0 root node
+	buildTree(arr, start = 0, end = arr.length - 1) {
+		if (start > end) return null
+		// Get the middle of the array
+		const mid = Math.floor((start + end) / 2)
+		// Establish root for this iteration
+		const root = new Node(arr[mid])
+		// Recurse me!
+		root.left = this.buildTree(arr, start, mid - 1)
+		root.right = this.buildTree(arr, mid + 1, end)
+
+		return root
 	}
 
 	insert(value) {
@@ -75,7 +79,11 @@ export class Tree {
 		//    If node has R child, add to queue
 	}
 
-	// inOrder, preOrder, and postOrder are recursive depth-first traversal
+	/*
+	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	 * inOrder, preOrder, and postOrder are a recursive depth-first traversal
+	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	 */
 
 	// <left> <root> <right>
 	inOrder(callback, node = this.root) {
