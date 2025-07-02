@@ -10,9 +10,9 @@ export class Tree {
 		if (start > end) return null
 		// Get the middle of the array
 		const mid = Math.floor((start + end) / 2)
-		// Establish root for this iteration
+		// Establish root for the subtrees
 		const root = new Node(arr[mid])
-		// Recurse me!
+		// Build subtrees
 		root.left = this.buildTree(arr, start, mid - 1)
 		root.right = this.buildTree(arr, mid + 1, end)
 
@@ -51,16 +51,15 @@ export class Tree {
 	}
 
 	find(value, node = this.root) {
-		// Find node containing (value) in a loop
-		// 1. If value === current: return current
-		//
-		// 2. If value < current
-		// Move L child to continue searching
-		//
-		// 3. If value > current
-		// Move R child to continue searching
-		//
-		// If nothing found, return null
+		// Base case
+		if (node === null || value === node.data) return node
+
+		// Check Left and then Right trees recursively
+		if (value < node.data) {
+			return this.find(value, node.left)
+		} else {
+			return this.find(value, node.right)
+		}
 	}
 
 	// levelOrder is a breadth-first traversal
