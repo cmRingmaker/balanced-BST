@@ -19,14 +19,18 @@ export class Tree {
 		return root
 	}
 
-	insert(value) {
-		// Init current node with root node
-		let currentNode = this.root
-		// Compare key with current node
-		// Move left if key <= current
-		// Move right if key >= current
-		// Repeat until reaching a leaf node
-		// Attach the new key as a left or right child
+	insert(value, node = this.root) {
+		// Base case, if we reach a null node, create and return a new one
+		if (!node) return new Node(value)
+		if (value === node.data) return node // Avoid duplicates
+		// Check & Set Left or Right trees recursively
+		if (value < node.data) {
+			node.left = this.insert(value, node.left)
+		} else {
+			node.right = this.insert(value, node.right)
+		}
+
+		return node
 	}
 
 	deleteItem(value) {
