@@ -66,32 +66,45 @@ export class Tree {
 		}
 	}
 
-	// levelOrder is a breadth-first traversal
-	levelOrder(callback) {
-		// Init current node with root node
-		let currentNode = this.root
-		// Init a queue
-		const queue = []
-		// If no callback, throw error
-		// If root === null : return
+	/*
+	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	 * levelOrder is a breadth-first traversal
+	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	 */
+
+	levelOrder(callback, node = this.root) {
+		if (!callback) throw new Error('No callback provided.')
+		if (!node) return
 		// Add root to queue
-		// While queue has items:
-		//    Dequeue first item
-		//    Call callback on this node
-		//    If node has L child, add to queue
-		//    If node has R child, add to queue
+		const queue = [node]
+
+		while (queue.length > 0) {
+			// Dequeue first item
+			const currentNode = queue.shift()
+
+			// Callback on this node
+			callback(currentNode)
+			// If node has L child, add to queue
+			if (currentNode.left) {
+				queue.push(currentNode.left)
+			}
+			// If node has R child, add to queue
+			if (currentNode.right) {
+				queue.push(currentNode.right)
+			}
+		}
 	}
 
 	/*
 	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	 * inOrder, preOrder, and postOrder are a recursive depth-first traversal
+	 * inOrder, preOrder, and postOrder are a depth-first traversal
 	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	 */
 
 	// <left> <root> <right>
 	inOrder(callback, node = this.root) {
 		if (!callback) throw new Error('No callback provided.')
-		if (node === null) return
+		if (!node) return
 		this.inOrder(callback, node.left)
 		callback(node)
 		this.inOrder(callback, node.right)
@@ -100,7 +113,7 @@ export class Tree {
 	// <root> <left> <right>
 	preOrder(callback, node = this.root) {
 		if (!callback) throw new Error('No callback provided.')
-		if (node === null) return
+		if (!node) return
 		callback(node)
 		this.preOrder(callback, node.left)
 		this.preOrder(callback, node.right)
@@ -109,7 +122,7 @@ export class Tree {
 	// <left> <right> <root>
 	postOrder(callback, node = this.root) {
 		if (!callback) throw new Error('No callback provided.')
-		if (node === null) return
+		if (!node) return
 		this.postOrder(callback, node.left)
 		this.postOrder(callback, node.right)
 		callback(node)
