@@ -33,25 +33,52 @@ export class Tree {
 		return node
 	}
 
-	deleteItem(value) {
-		// Find node containing (value) and its parent
-		// If value is not found, return
-		//
-		// 1. If node is a leaf:
-		// If root, set to null
-		// Else set parents appropriate L or R to null
-		//
-		// 2. If node has only one child
-		// Replace node with child
-		// If root, set root to its child
-		// Else set parents appropriate child to this nodes single child
-		//
-		// 3. If node has two children
-		// Find smallest node in right subtree
-		// Copy data to the node being deleted
-		// Recursively delete node from its original position
-		//
-		// Note: if 3 happens, the deletion will eventually fall into case 1 or 2
+	deleteItem(value, node = this.root) {
+		// Base case
+		if (!node) return null
+
+		// Found the node to delete
+		if (value === node.data) {
+			// Deletion cases
+			// 1. Leaf node (no children)
+			if (node.left === null && node.right === null) {
+				return null
+			}
+
+			// 2. One child
+			if (node.left === null) {
+				return node.right // Promote right child to parent
+			} else if (node.right === null) {
+				return node.left // Promote left child to parent
+			}
+
+			// 3. Two children
+			// Step 1: Find smallest node in right subtree
+			const successor = this.findMinHelper(node.right)
+			// Step 2: Copy successor value to this node
+			node.data = successor.data
+			// Step 3: Delete successor from the right subtree
+			node.right = this.deleteItem(successor.data, node.right)
+
+			return node
+
+			// Recursively search until we find our value!
+		} else if (value < node.data) {
+			node.left = this.deleteItem(value, node.left)
+		} else {
+			node.right = this.deleteItem(value, node.right)
+		}
+
+		return node
+	}
+
+	findMinHelper(node) {
+		// Find smallest possible value
+		if (node.left !== null) {
+			return this.findMinHelper(node.left)
+		}
+
+		return node
 	}
 
 	find(value, node = this.root) {
