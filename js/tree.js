@@ -204,7 +204,25 @@ export class Tree {
 		}
 	}
 
-	isBalanced() {}
+	isBalanced(node = this.root) {
+		if (!node) return true // Empty tree or a leaf are balanced
+
+		// Calculate heights of subtrees from current node
+		const lh = this.calculateHeight(node.left)
+		const rh = this.calculateHeight(node.right)
+
+		// Recursively check if subtrees are balanced
+		const left = this.isBalanced(node.left)
+		const right = this.isBalanced(node.right)
+
+		// Check within balanced range < 2
+		// Check L and R
+		if (Math.abs(lh - rh) < 2 && left && right) {
+			return true
+		} else {
+			return false
+		}
+	}
 
 	rebalance() {}
 }
