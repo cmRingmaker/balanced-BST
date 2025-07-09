@@ -155,8 +155,39 @@ export class Tree {
 		callback(node)
 	}
 
-	height(value) {}
+	/*
+	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	 * Height measures from value to the farthest leaf
+	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	 */
+	height(value, node = this.root) {
+		// Base case: Return -1 since we add +1 on recursive calls to keep track of edges or null if value doesn't exist
+		if (!node) {
+			return value === null ? -1 : null
+		}
 
+		// Calculate height: find longest path down from current node
+		if (value === null) {
+			let left = this.height(null, node.left)
+			let right = this.height(null, node.right)
+			return Math.max(left, right) + 1 // +1 for edge count
+		}
+
+		// Find the value if it exists
+		if (value === node.data) {
+			return this.height(null, node)
+		} else if (value < node.data) {
+			return this.height(value, node.left)
+		} else {
+			return this.height(value, node.right)
+		}
+	}
+
+	/*
+	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	 * Depth measures from value to the root
+	 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	 */
 	depth(value) {}
 
 	isBalanced() {}
