@@ -224,5 +224,13 @@ export class Tree {
 		}
 	}
 
-	rebalance() {}
+	rebalance() {
+		// Use inOrder to rebalance the tree
+		const sorted = []
+		this.inOrder((node) => sorted.push(node.data))
+
+		// Rebuild root with the rebalanced array
+		this.root = this.buildTree(sorted)
+		return this.root
+	}
 }
