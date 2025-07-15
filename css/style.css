@@ -12,12 +12,17 @@
 	font-size: 62.5%; /* [1a] */
 
 	/* Main colors */
-	--COLOR_BG: hsl(0, 5%, 10%);
-	--COLOR_PRIMARY: hsl(220, 90%, 15%);
-	--COLOR_SECONDARY: hsl(303, 71%, 73%);
+	--GreenBG: oklch(44.4% 0.04 133);
+	--DarkGreenBG: oklch(38.2% 0.03 131);
+	--YellowHighlight: oklch(76.6% 0.12 101);
+
+	/* Borders */
+	--Border: 1px solid oklch(29.15% 0.02 129); /* Default to dark */
+	--BorderBright: oklch(60% 0 90);
+	--BorderDark: oklch(29.15% 0.02 129);
 
 	/* Text */
-	--FONT_COLOR: hsl(30, 100%, 98%);
+	--OffWhite: oklch(98.75% 0.01 68);
 }
 
 /* 
@@ -28,14 +33,16 @@
 
 body {
 	font-size: 1.8rem;
-	background-color: var(--COLOR_BG);
-	color: var(--FONT_COLOR);
+	background-color: var(--GreenBG);
+	color: var(--OffWhite);
 	height: 100vh;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
 }
 
 ::selection {
-	background-color: var(--COLOR_SECONDARY);
-	color: var(--COLOR_BG);
+	background-color: var(--YellowHighlight);
+	color: var(--DarkGreenBG);
 }
 
 /* 
@@ -45,7 +52,8 @@ body {
 */
 
 header {
-	background-color: var(--COLOR_PRIMARY);
+	font-size: 2.4rem;
+	padding: 15px 0 0 30px;
 }
 
 /*
@@ -55,6 +63,14 @@ header {
 */
 
 main {
+	width: 1200px;
+	height: 800px;
+	margin: 20px;
+	background-color: var(--DarkGreenBG);
+	/* Contrasting borders for container */
+	border: var(--Border);
+	border-top-color: var(--BorderBright);
+	border-left-color: var(--BorderBright);
 }
 
 /*
@@ -64,5 +80,6 @@ main {
 */
 
 footer {
-	background-color: var(--COLOR_PRIMARY);
+	padding: 0 0 10px 10px;
+	font-size: 2rem;
 }
