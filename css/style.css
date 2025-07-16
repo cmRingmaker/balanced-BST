@@ -35,9 +35,8 @@ body {
 	font-size: 1.8rem;
 	background-color: var(--GreenBG);
 	color: var(--OffWhite);
-	height: 100vh;
-	display: grid;
-	grid-template-rows: auto 1fr auto;
+	display: flex;
+	flex-direction: column;
 }
 
 ::selection {
@@ -63,14 +62,32 @@ header {
 */
 
 main {
+	display: grid;
+	grid-template-columns: 300px 1fr;
+	grid-template-rows: 100px auto;
+	gap: 15px;
 	width: 1200px;
 	height: 800px;
-	margin: 20px;
-	background-color: var(--DarkGreenBG);
-	/* Contrasting borders for container */
-	border: var(--Border);
-	border-top-color: var(--BorderBright);
-	border-left-color: var(--BorderBright);
+	margin: auto;
+
+	> :first-child {
+		grid-column: 1 / -1;
+		font-size: 2rem;
+	}
+
+	fieldset {
+		background-color: var(--DarkGreenBG);
+		border: var(--Border);
+		border-bottom-color: var(--BorderBright);
+		border-right-color: var(--BorderBright);
+		height: 100%;
+
+		legend {
+			padding: 0 4px;
+			margin-left: 15px;
+			user-select: none;
+		}
+	}
 }
 
 /*
@@ -82,4 +99,5 @@ main {
 footer {
 	padding: 0 0 10px 10px;
 	font-size: 2rem;
+	margin-top: auto;
 }
