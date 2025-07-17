@@ -32,7 +32,8 @@
 */
 
 body {
-	font-size: 1.8rem;
+	font-family: 'Courier New', monospace;
+	font-size: 1.4rem;
 	background-color: var(--GreenBG);
 	color: var(--OffWhite);
 	display: flex;
@@ -64,7 +65,7 @@ header {
 main {
 	display: grid;
 	grid-template-columns: 300px 1fr;
-	grid-template-rows: 100px auto;
+	grid-template-rows: 125px auto;
 	gap: 15px;
 	width: 1200px;
 	height: 900px;
@@ -87,6 +88,7 @@ main {
 			padding: 0 4px;
 			margin-left: 15px;
 			user-select: none;
+			font-size: 2rem;
 		}
 	}
 }
@@ -96,6 +98,21 @@ main {
 * Information
 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 */
+
+ul {
+	padding: 0 15px;
+	inset: 10px;
+}
+
+li {
+	font-size: 1.4rem;
+	white-space: nowrap;
+
+	span {
+		letter-spacing: -1px;
+		word-spacing: -5px;
+	}
+}
 
 /*
 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -114,11 +131,8 @@ main {
 }
 
 #tree-output {
-	font-family: 'Courier New', monospace;
-	font-size: 1.4rem;
 	line-height: 1.2;
-	height: calc(100% - 30px);
-	padding: 0 40px;
+	padding: 0 50px;
 	/* white-space necessary for proper layout of tree  */
 	white-space: pre-wrap;
 }
