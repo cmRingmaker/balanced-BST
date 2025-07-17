@@ -67,8 +67,9 @@ main {
 	grid-template-rows: 100px auto;
 	gap: 15px;
 	width: 1200px;
-	height: 800px;
+	height: 900px;
 	margin: auto;
+	overflow: hidden;
 
 	> :first-child {
 		grid-column: 1 / -1;
@@ -88,6 +89,38 @@ main {
 			user-select: none;
 		}
 	}
+}
+
+/*
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Information
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+/*
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Input
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+/*
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Output
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+#output {
+	overflow: auto;
+}
+
+#tree-output {
+	font-family: 'Courier New', monospace;
+	font-size: 1.4rem;
+	line-height: 1.2;
+	height: calc(100% - 30px);
+	padding: 0 40px;
+	/* white-space necessary for proper layout of tree  */
+	white-space: pre-wrap;
 }
 
 /*
