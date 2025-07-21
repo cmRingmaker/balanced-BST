@@ -14,7 +14,7 @@
 	/* Main colors */
 	--GreenBG: oklch(44.4% 0.04 133);
 	--DarkGreenBG: oklch(38.2% 0.03 131);
-	--YellowHighlight: oklch(76.6% 0.12 101);
+	--Yellow: oklch(76.6% 0.12 101);
 
 	/* Borders */
 	--Border: 1px solid oklch(29.15% 0.02 129); /* Default to dark */
@@ -41,7 +41,7 @@ body {
 }
 
 ::selection {
-	background-color: var(--YellowHighlight);
+	background-color: var(--OffWhite);
 	color: var(--DarkGreenBG);
 }
 
@@ -88,7 +88,9 @@ main {
 			padding: 0 4px;
 			margin-left: 15px;
 			user-select: none;
-			font-size: 2rem;
+			font-size: 2.4rem;
+			color: var(--Yellow);
+			text-shadow: -1px 1px 1px black;
 		}
 	}
 }
@@ -107,7 +109,13 @@ ul {
 li {
 	font-size: 1.4rem;
 	white-space: nowrap;
+	display: flex;
 
+	strong {
+		width: 110px;
+	}
+
+	/* Span has input from JS */
 	span {
 		letter-spacing: -1px;
 		word-spacing: -5px;
