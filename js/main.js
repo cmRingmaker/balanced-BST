@@ -1,12 +1,3 @@
-// Make this user-changable later
-// const defaultArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
-const defaultArray = [
-	1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
-	33, 34, 35,
-]
-
-const tree = new Tree(defaultArray)
-
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Imports
@@ -18,17 +9,30 @@ import { Node } from './node.js'
 
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Globals
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ */
+
+const defaultArray = [
+	1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+	33, 34, 35,
+]
+
+let tree = new Tree(defaultArray)
+
+/*
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Event Listeners
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 
-document.addEventListener('DOMContentLoaded', initializeTree(), initializeInfo())
+document.addEventListener('DOMContentLoaded', () => {
+	initializeTree()
+	initializeInfo()
+})
 
-/*
- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Dom Elements
- * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- */
+// Randomize
+document.getElementById('random-btn').addEventListener('click', generateRandomTree)
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Driver Functions
@@ -82,4 +86,12 @@ function initializeInfo() {
 	})
 }
 
-// initializeInfo()
+function generateRandomTree() {
+	const randomNumbers = Array.from({ length: 30 }, () => Math.floor(Math.random() * 150) + 1)
+
+	// Rebuild tree
+	tree = new Tree(randomNumbers)
+
+	initializeTree()
+	initializeInfo()
+}
