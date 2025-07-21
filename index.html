@@ -16,6 +16,7 @@
 
 <body>
   <main>
+    <!-- Info -->
     <fieldset id="info">
       <legend>Binary Search Tree Information</legend>
       <ul>
@@ -26,19 +27,32 @@
       </ul>
     </fieldset>
 
+    <!-- Input -->
     <form>
       <fieldset id='input'>
         <legend>Input</legend>
-
-        <button type='button' id='random-btn'>Generate Random Tree</button>
 
         <div>
           <input type="number" id="insert" placeholder='Value to insert'>
           <button type='button' id='insert-btn'>Insert</button>
         </div>
+
+        <div>
+          <input type="number" id="delete" placeholder='Value to delete'>
+          <button type='button' id='delete-btn'>Delete</button>
+        </div>
+
+
+        <div>
+          <input type="number" id="find" placeholder='Value to find'>
+          <button type='button' id='find-btn'>Find</button>
+        </div>
+
+        <button type='button' id='random-btn'>Generate Random Tree</button>
       </fieldset>
     </form>
 
+    <!-- Output -->
     <fieldset id="output">
       <legend>Output</legend>
       <div id="tree-output"></div>

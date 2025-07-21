@@ -72,7 +72,7 @@ main {
 	margin: auto;
 	overflow: hidden;
 
-	> :first-child {
+	& > :first-child {
 		grid-column: 1 / -1;
 		font-size: 2rem;
 	}
@@ -131,6 +131,50 @@ li {
 #input {
 	display: flex;
 	flex-direction: column;
+
+	div {
+		display: flex;
+		height: 30px;
+		margin: 10px 10px;
+		justify-content: space-between;
+
+		input {
+			/* padding-left: 10px; */
+			font-size: 2rem;
+			color: var(--OffWhite);
+			font-weight: 600;
+			border: var(--Border);
+			background-color: var(--GreenBG);
+		}
+
+		/* Hide the arrows out of the input=number */
+		/* For Chrome, Safari, Edge, and Opera (WebKit browsers) */
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0; /* Important for removing any leftover space */
+		}
+
+		/* For Firefox */
+		input[type='number'] {
+			-moz-appearance: textfield;
+		}
+
+		button {
+			width: 65px;
+		}
+	}
+
+	button {
+		cursor: pointer;
+		/* width: 70px; */
+	}
+
+	& > :last-child {
+		margin-top: auto;
+		padding: 10px 20px;
+		width: 100%;
+	}
 }
 
 /*
