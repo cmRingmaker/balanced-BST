@@ -17,9 +17,9 @@
 	--Yellow: oklch(76.6% 0.12 101);
 
 	/* Borders */
-	--Border: 1px solid oklch(29.15% 0.02 129); /* Default to dark */
 	--BorderBright: oklch(60% 0 90);
 	--BorderDark: oklch(29.15% 0.02 129);
+	--Border: 1px solid var(--BorderDark); /* Default to dark */
 
 	/* Text */
 	--OffWhite: oklch(98.75% 0.01 68);
@@ -131,20 +131,27 @@ li {
 #input {
 	display: flex;
 	flex-direction: column;
+	gap: 25px;
 
 	div {
 		display: flex;
 		height: 30px;
-		margin: 10px 10px;
-		justify-content: space-between;
+		gap: 7px;
+		padding: 0 6px;
 
 		input {
-			/* padding-left: 10px; */
+			width: 100%;
 			font-size: 2rem;
+			padding-left: 8px;
 			color: var(--OffWhite);
-			font-weight: 600;
 			border: var(--Border);
 			background-color: var(--GreenBG);
+
+			&:focus {
+				outline: none;
+				border: 1px solid var(--Yellow);
+				box-shadow: 0 0 3px black;
+			}
 		}
 
 		/* Hide the arrows out of the input=number */
@@ -161,19 +168,25 @@ li {
 		}
 
 		button {
-			width: 65px;
+			width: 75px;
 		}
 	}
 
 	button {
 		cursor: pointer;
-		/* width: 70px; */
+		background-color: var(--Yellow);
+		border: 1px solid var(--BorderBright);
+
+		&:hover {
+			border: var(--Border);
+		}
 	}
 
 	& > :last-child {
 		margin-top: auto;
 		padding: 10px 20px;
-		width: 100%;
+		border: none;
+		border-top: 1px solid var(--BorderBright);
 	}
 }
 

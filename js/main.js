@@ -19,7 +19,7 @@ const defaultArray = [
 ]
 
 let tree = new Tree(defaultArray)
-
+console.log('YAY!')
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Event Listeners
@@ -27,15 +27,98 @@ let tree = new Tree(defaultArray)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-	initializeTree()
-	initializeInfo()
+	renderTree()
 })
 
+// Input buttons
+document.getElementById('insert-btn').addEventListener('click', handleInsert)
+document.getElementById('delete-btn').addEventListener('click', handleDelete)
+document.getElementById('find-btn').addEventListener('click', handleFind)
 // Randomize
 document.getElementById('random-btn').addEventListener('click', generateRandomTree)
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Driver Functions
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ */
+
+function renderTree() {
+	// Update visual tree representation
+	const output = document.getElementById('tree-output')
+	output.textContent = prettyPrint(tree.root)
+
+	// Update traversal information
+	updateTraversalInfo()
+}
+
+function updateTraversalInfo() {
+	// Target the id to insert into, and use the corresponding method from the tree
+	const traverse = [
+		{ id: 'level-order', method: 'levelOrder' },
+		{ id: 'in-order', method: 'inOrder' },
+		{ id: 'pre-order', method: 'preOrder' },
+		{ id: 'post-order', method: 'postOrder' },
+	]
+
+	traverse.forEach(({ id, method }) => {
+		const res = []
+		tree[method]((node) => res.push(node.data))
+		document.getElementById(id).querySelector('span').textContent = `${res.join(', ')}`
+	})
+}
+
+function handleInsert() {
+	const inputData = getInput('insert')
+	if (!inputData) return
+	const { input, value } = inputData
+
+	tree.insert(value)
+	clearInputAndRefresh(input)
+}
+
+function handleDelete() {
+	const inputData = getInput('delete')
+	if (!inputData) return
+	const { input, value } = inputData
+
+	// Check if value exists before deleting
+	if (!tree.find(value)) {
+		alert(`Value ${value} not found in tree`)
+		clearInputAndRefresh(input, false) // Don't re-render tree since nothing has changed
+		return
+	}
+
+	tree.deleteItem(value)
+	clearInputAndRefresh(input)
+}
+
+function handleFind() {
+	const inputData = getInput('find')
+	if (!inputData) return
+	const { input, value } = inputData
+
+	// Search for value and show result
+	const found = tree.find(value)
+	if (found) {
+		alert(`Value ${value} found in tree!`)
+	} else {
+		alert(`Value ${value} not found in tree`)
+	}
+
+	clearInputAndRefresh(input, false) // Don't re-render since nothing has changed
+}
+
+function generateRandomTree() {
+	const randomNumbers = Array.from({ length: 30 }, () => Math.floor(Math.random() * 150) + 1)
+
+	// Rebuild tree
+	tree = new Tree(randomNumbers)
+
+	renderTree()
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Helper Functions
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 
@@ -62,36 +145,27 @@ function prettyPrint(node, prefix = '', isLeft = true) {
 	return result
 }
 
-function initializeTree() {
-	// Render tree in output
-	const output = document.getElementById('tree-output')
-	output.textContent = prettyPrint(tree.root)
+function getInput(inputId) {
+	// Asign related id input to value
+	const input = document.getElementById(inputId)
+	const value = parseInt(input.value)
+
+	// Allow only numbers
+	if (isNaN(value)) {
+		alert('Please enter a valid number')
+		return null
+	}
+
+	// Input and Value returns for driver functions
+	return { input, value }
 }
 
-function initializeInfo() {
-	// Render information in Info
+function clearInputAndRefresh(input, shouldRender = true) {
+	// Clear input
+	input.value = ''
 
-	// Target the id to insert into, and use the corresponding method from the tree
-	const traverse = [
-		{ id: 'level-order', method: 'levelOrder' },
-		{ id: 'in-order', method: 'inOrder' },
-		{ id: 'pre-order', method: 'preOrder' },
-		{ id: 'post-order', method: 'postOrder' },
-	]
-
-	traverse.forEach(({ id, method }) => {
-		const res = []
-		tree[method]((node) => res.push(node.data))
-		document.getElementById(id).querySelector('span').textContent = `${res.join(', ')}`
-	})
-}
-
-function generateRandomTree() {
-	const randomNumbers = Array.from({ length: 30 }, () => Math.floor(Math.random() * 150) + 1)
-
-	// Rebuild tree
-	tree = new Tree(randomNumbers)
-
-	initializeTree()
-	initializeInfo()
+	// Refresh tree
+	if (shouldRender) {
+		renderTree()
+	}
 }
