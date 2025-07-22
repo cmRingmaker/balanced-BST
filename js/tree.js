@@ -233,4 +233,25 @@ export class Tree {
 		this.root = this.buildTree(sorted)
 		return this.root
 	}
+
+	saveToStorage() {
+		const treeData = []
+		this.inOrder((node) => treeData.push(node.data))
+		localStorage.setItem('bst-tree', JSON.stringify(treeData))
+	}
+
+	loadFromStorage() {
+		const saved = localStorage.getItem('bst-tree')
+		if (saved) {
+			const savedArr = JSON.parse(saved)
+			this.arr = savedArr
+			this.root = this.buildTree(savedArr)
+			return true
+		}
+		return false
+	}
+
+	clearStorage() {
+		localStorage.removeItem('bst-tree')
+	}
 }
