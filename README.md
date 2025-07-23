@@ -45,12 +45,12 @@ The left panel displays:
 - Uses localStorage for persistence
 - Implements self-balancing BST algorithms
 - Clean, semantic HTML with CSS Grid layout
-- Responsive design with retro Steam aesthetic
+- Retro terminal design with a classic Steam aesthetic
 
 ## Project Structure
 
 ```
-├── assets/          # Images and icons
+├── assets/         # Images and icons
 ├── css/            # Stylesheets
 ├── js/             # JavaScript modules
 ├── index.html      # Main HTML file
