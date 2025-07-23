@@ -45,7 +45,7 @@ The left panel displays:
 - Uses localStorage for persistence
 - Implements self-balancing BST algorithms
 - Clean, semantic HTML with CSS Grid layout
-- Responsive design with retro terminal aesthetic
+- Responsive design with retro Steam aesthetic
 
 ## Project Structure
 
