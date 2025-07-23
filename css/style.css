@@ -144,6 +144,11 @@ li {
 		gap: 7px;
 		padding: 0 6px;
 
+		&:first-of-type {
+			flex-direction: column;
+			margin-bottom: 50px;
+		}
+
 		input {
 			width: 100%;
 			font-size: 2rem;

@@ -29,13 +29,16 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Try to load from localStorage first
 	tree = new Tree()
 
+	// Only load default if no saved data
 	if (!tree.loadFromStorage()) {
-		// If no saved data, use default array
 		tree = new Tree(defaultArray)
-		tree.saveToStorage() //Save the default
+		tree.saveToStorage()
 	}
 	renderTree()
 })
+
+// Custom array input
+document.getElementById('user-array').addEventListener('input', handleCustomArray)
 
 // Input/button pairs with their handlers (Supporting Click + Enter key)
 const inputActions = [
@@ -79,13 +82,13 @@ function renderTree() {
 	const output = document.getElementById('tree-output')
 	output.textContent = prettyPrint(tree.root)
 
-	// Update traversal information
+	// Update UI elements
 	updateTraversalInfo()
 	updateBalanceButton()
 }
 
 function updateTraversalInfo() {
-	// Target the id to insert into, and use the corresponding method from the tree
+	// Handle traversal methods only
 	const traverse = [
 		{ id: 'level-order', method: 'levelOrder' },
 		{ id: 'in-order', method: 'inOrder' },
@@ -99,11 +102,36 @@ function updateTraversalInfo() {
 		document.getElementById(id).querySelector('span').textContent = `${res.join(', ')}`
 	})
 
-	// Handle isBalanced seperately
+	// Handle isBalanced display only
 	const balanced = tree.isBalanced()
 	const balancedSpan = document.getElementById('balanced').querySelector('span')
 	balancedSpan.textContent = balanced
 	balancedSpan.setAttribute('data-value', balanced)
+}
+
+function updateBalanceButton() {
+	// Handle button visibility only
+	const balanceBtn = document.getElementById('balance-btn')
+	const isBalanced = tree.isBalanced()
+
+	balanceBtn.style.display = isBalanced ? 'none' : 'block'
+}
+
+function handleCustomArray() {
+	const input = document.getElementById('user-array').value.trim()
+
+	// Empty input = empty tree
+	if (!input) {
+		tree = new Tree([])
+		renderTree()
+		return
+	}
+
+	// Parse by spaces only & build tree
+	const numbers = input.split(/\s+/).map((str) => parseInt(str))
+	tree = new Tree(numbers)
+	tree.saveToStorage()
+	renderTree()
 }
 
 function handleInsert() {
@@ -215,12 +243,4 @@ function clearInputAndRefresh(input, shouldRender = true) {
 	if (shouldRender) {
 		renderTree()
 	}
-}
-
-function updateBalanceButton() {
-	// Handle button visibility only
-	const balanceBtn = document.getElementById('balance-btn')
-	const isBalanced = tree.isBalanced()
-
-	balanceBtn.style.display = isBalanced ? 'none' : 'block'
 }

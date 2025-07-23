@@ -35,19 +35,23 @@
         <legend>Input</legend>
 
         <div>
-          <!-- <label for="insert">Insert number</label> -->
-          <input type="number" id="insert" placeholder='Value to insert'>
+          <label for="user-array">Enter numbers, seperated by spaces</label>
+          <input type="text" id='user-array' pattern='[\d\s]+' placeholder='1 2 3 ...'>
+        </div>
+
+        <div>
+          <input type="number" id="insert" placeholder='Value to insert' min='1'>
           <button type='button' id='insert-btn'>Insert</button>
         </div>
 
         <div>
-          <input type="number" id="delete" placeholder='Value to delete'>
+          <input type="number" id="delete" placeholder='Value to delete' min='1'>
           <button type='button' id='delete-btn'>Delete</button>
         </div>
 
 
         <div>
-          <input type="number" id="find" placeholder='Value to find'>
+          <input type="number" id="find" placeholder='Value to find' min='1'>
           <button type='button' id='find-btn'>Find</button>
         </div>
 
