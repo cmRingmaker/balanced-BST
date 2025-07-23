@@ -19,7 +19,6 @@ const defaultArray = [
 ]
 let tree
 
-console.log('YAY!')
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Event Listeners
@@ -38,12 +37,37 @@ document.addEventListener('DOMContentLoaded', () => {
 	renderTree()
 })
 
-// Input buttons
-document.getElementById('insert-btn').addEventListener('click', handleInsert)
-document.getElementById('delete-btn').addEventListener('click', handleDelete)
-document.getElementById('find-btn').addEventListener('click', handleFind)
-// Randomize
-document.getElementById('random-btn').addEventListener('click', generateRandomTree)
+// Input/button pairs with their handlers (Supporting Click + Enter key)
+const inputActions = [
+	{ input: 'insert', button: 'insert-btn', handler: handleInsert },
+	{ input: 'delete', button: 'delete-btn', handler: handleDelete },
+	{ input: 'find', button: 'find-btn', handler: handleFind },
+]
+
+// Button-only actions
+const buttonActions = [
+	{ button: 'balance-btn', handler: rebalanceTree },
+	{ button: 'random-btn', handler: generateRandomTree },
+]
+
+// Set up click and enter handlers for each input/button pairs
+inputActions.forEach(({ input, button, handler }) => {
+	// Button click
+	document.getElementById(button).addEventListener('click', handler)
+
+	// Enter key on input
+	document.getElementById(input).addEventListener('keydown', (e) => {
+		if (e.key === 'Enter') {
+			e.preventDefault()
+			handler()
+		}
+	})
+})
+
+// Set up click handlers for button-only actions
+buttonActions.forEach(({ button, handler }) => {
+	document.getElementById(button).addEventListener('click', handler)
+})
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * Driver Functions
@@ -57,6 +81,7 @@ function renderTree() {
 
 	// Update traversal information
 	updateTraversalInfo()
+	updateBalanceButton()
 }
 
 function updateTraversalInfo() {
@@ -73,6 +98,12 @@ function updateTraversalInfo() {
 		tree[method]((node) => res.push(node.data))
 		document.getElementById(id).querySelector('span').textContent = `${res.join(', ')}`
 	})
+
+	// Handle isBalanced seperately
+	const balanced = tree.isBalanced()
+	const balancedSpan = document.getElementById('balanced').querySelector('span')
+	balancedSpan.textContent = balanced
+	balancedSpan.setAttribute('data-value', balanced)
 }
 
 function handleInsert() {
@@ -116,6 +147,12 @@ function handleFind() {
 	}
 
 	clearInputAndRefresh(input, false) // Don't re-render since nothing has changed
+}
+
+function rebalanceTree() {
+	tree.rebalance()
+	tree.saveToStorage()
+	renderTree()
 }
 
 function generateRandomTree() {
@@ -178,4 +215,12 @@ function clearInputAndRefresh(input, shouldRender = true) {
 	if (shouldRender) {
 		renderTree()
 	}
+}
+
+function updateBalanceButton() {
+	// Handle button visibility only
+	const balanceBtn = document.getElementById('balance-btn')
+	const isBalanced = tree.isBalanced()
+
+	balanceBtn.style.display = isBalanced ? 'none' : 'block'
 }
